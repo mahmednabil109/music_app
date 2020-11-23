@@ -270,7 +270,7 @@ def get_brief_info_artist(artists):
   current = datetime.utcnow()
   for artist in artists:
     obj = {"id": artist[0],"name":artist[1],"num_upcoming_shows":0}
-    num = db.session.query(Show.id).filter(Show.start_time >= current).count()
+    num = len([s for s in db.session.query(Show.id,Show.start_time) if s[1] >= current])
     obj["num_upcoming_shows"] = num
     res.append(obj)
   return res
@@ -283,6 +283,7 @@ def search_artists():
   search_key = request.form.get("search_term","")
   search_res = db.session.query(Artist.id,Artist.name).filter(Artist.name.ilike("%{}%".format(search_key)))
   artists = get_brief_info_artist(search_res)
+  print(artists)
   response={
     "count": len(artists),
     "data": artists
