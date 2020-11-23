@@ -102,8 +102,9 @@ def index():
 #  ----------------------------------------------------------------
 def get_brief_info_venue(venues):
   res = []
+  current = datetime.utcnow()
   for venue in venues:
-      upcoming_shows = db.session.query(Show.id).filter(Show.venue_id == venue[0]).filter(Show.start_time >= datetime.utcnow()).count()
+      upcoming_shows = len([s for s in db.session.query(Show.id,Show.start_time).filter(Show.venue_id == venue[0]) if s[1] >= current]) 
       obj2 = {"id":venue[0],"name":venue[1],"num_upcoming_shows":upcoming_shows}
       res.append(obj2)
   return res
