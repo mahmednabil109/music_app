@@ -184,7 +184,7 @@ def show_venue(venue_id):
     data['facebook_link'] = db_venue.facebook_link
   if db_venue.image_link :
     data['image_link'] = db_venue.image_link
-  if db_venue.facebook_link :
+  if db_venue.website_link :
     data['website'] = db_venue.website_link
   if db_venue.seeking_talent:
     data['seeking_description'] = db_venue.seeking_description
@@ -332,7 +332,7 @@ def show_artist(artist_id):
     data['facebook_link'] = db_artist.facebook_link
   if db_artist.image_link :
     data['image_link'] = db_artist.image_link
-  if db_artist.facebook_link :
+  if db_artist.website_link :
     data['website'] = db_artist.website_link
   if db_artist.seeking_venue:
     data['seeking_description'] = db_artist.seeking_description
